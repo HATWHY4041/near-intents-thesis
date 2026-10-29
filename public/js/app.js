@@ -65,7 +65,6 @@ function render(d) {
   // verdict: the stance follows from the numbers, so it changes when they do
   const need = byId.base.result.growthNeeded;
   const trend = mi.monthlyGrowthTrend;
-  const when = (s) => (s.result.firstFullCoverage ? `month ${s.result.firstFullCoverage}` : "not within 3 years");
   let stance;
   if (trend >= need) stance = `<strong>Stance: constructive.</strong> The 12-month trend (${signed(trend, 1)} a month) is already at or above the ${signed(need, 1)} a month the thesis needs. Hold a long-term position while the four claims below hold.`;
   else if (trend >= need / 2) stance = `<strong>Stance: constructive but conditional.</strong> The 12-month trend (${signed(trend, 1)} a month) is about half of the ${signed(need, 1)} a month needed. Build a position slowly and add only if the trend keeps rising toward that level.`;
@@ -73,7 +72,9 @@ function render(d) {
   $("verdict-text").innerHTML =
     `Intents moved <strong>${usd(h.vol90)}</strong> in the last 90 days and NEAR kept <strong>${h.takeRateBps.toFixed(1)} bps</strong> of it. ` +
     `That pays for about <strong>${usd(h.buybackAnnual)}</strong> of buybacks a year, against <strong>${usd(h.issuanceUsdYear)}</strong> of new NEAR from inflation: <strong>${pct(h.coverage)}</strong> covered. ` +
-    `Buybacks match new supply in the bull case at ${when(byId.bull)}, and in the base case ${when(byId.base) === "not within 3 years" ? "not within 3 years" : "at " + when(byId.base)}.` +
+    (byId.bull.result.firstFullCoverage
+      ? `In the model, buybacks match new supply at month ${byId.bull.result.firstFullCoverage} in the bull case and ${byId.base.result.firstFullCoverage ? "month " + byId.base.result.firstFullCoverage : "not within 3 years"} in the base case.`
+      : `In the model, buybacks do not match new supply within 3 years even in the bull case; they reach ${pct(byId.bull.result.years[2].coverage)} by year 3.`) +
     `<br><br>${stance}`;
 
   // claims
@@ -111,7 +112,9 @@ function render(d) {
   });
 
   // indexed: per-day volume vs per-day L1 transactions, base = first full month with both
-  const baseI = M.findIndex((m) => !m.partial && m.volume > 0 && m.l1TxnsPerDay);
+  // Index both lines from the start of the 12-month trend window (earlier months, when Intents was tiny, make any ratio meaningless).
+  const startKey = (h.trendWindow || "").slice(0, 7);
+  const baseI = Math.max(0, M.findIndex((m) => m.month === startKey && m.l1TxnsPerDay));
   const vpd = M.map((m) => (m.daysCovered ? m.volume / m.daysCovered : null));
   const idxVol = M.map((m, i) => (i < baseI ? null : (vpd[i] / vpd[baseI]) * 100));
   const idxTx = M.map((m, i) => (i < baseI || !m.l1TxnsPerDay ? null : (m.l1TxnsPerDay / M[baseI].l1TxnsPerDay) * 100));
@@ -156,7 +159,7 @@ function render(d) {
   let active = "base";
   const setSliders = (inp) => {
     ctl.growth.value = (inp.monthlyGrowth * 100).toFixed(2);
-    ctl.take.value = inp.takeRateBps.toFixed(1);
+    ctl.take.value = inp.takeRateBps.toFixed(2);
     ctl.price.value = inp.price.toFixed(2);
     ctl.infl.value = inp.inflationPct.toFixed(2);
   };
