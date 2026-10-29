@@ -1,0 +1,13 @@
+{
+  "name": "near-intents-thesis",
+  "version": "1.0.0",
+  "description": "A data-backed, re-runnable long-term investment thesis for NEAR, built on NEAR Intents.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "model": "node scripts/model.mjs",
+    "start": "node server.js"
+  }
+}

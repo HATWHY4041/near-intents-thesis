@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEAR Intents Thesis</title>
+  <meta name="description" content="A data-backed, live and re-runnable long-term investment thesis for NEAR: can NEAR Intents buybacks outgrow NEAR's inflation?">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top" id="top">
+    <div class="wrap top-in">
+      <a class="mark" href="#top">NEAR Intents <span>Thesis</span></a>
+      <nav aria-label="Sections">
+        <a href="#claims">Claims</a><a href="#evidence">Evidence</a><a href="#value">Valuation</a><a href="#model">Model</a><a href="#risks">Risks</a><a href="#method">Method</a>
+      </nav>
+      <span class="live" id="live"><i aria-hidden="true"></i><span id="live-text">Loading live data…</span></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <p class="eyebrow">Long-term investment thesis · NEAR · <span data-k="asOfLong">October 2026</span></p>
+      <h1>NEAR is turning from a blockchain people build on into an exchange layer people route money through.</h1>
+      <p class="lede">
+        NEAR Intents lets anyone swap almost any token across 30-plus chains, and since 23 February 2026 the fees NEAR keeps from those swaps buy NEAR back on the open market.
+        The long-term case comes down to one measurable question: <strong>can those buybacks grow faster than the new NEAR that inflation creates?</strong>
+        Every number on this page is pulled live from public data, and the model behind the conclusion can be re-run by anyone.
+      </p>
+
+      <div class="verdict" id="verdict">
+        <p class="verdict-label">Where it stands today</p>
+        <p class="verdict-text" id="verdict-text">Loading…</p>
+      </div>
+
+      <div class="tiles" id="tiles" aria-live="polite">
+        <div class="tile"><span class="tile-k">Intents volume, last 90 days</span><b data-k="vol90">…</b><span class="tile-s" data-k="volYoYText">&nbsp;</span></div>
+        <div class="tile"><span class="tile-k">NEAR's cut of each swap</span><b data-k="takeRate">…</b><span class="tile-s" data-k="rev90Text">&nbsp;</span></div>
+        <div class="tile"><span class="tile-k">Buybacks, yearly pace</span><b data-k="buybackAnnual">…</b><span class="tile-s" data-k="buyStartText">&nbsp;</span></div>
+        <div class="tile"><span class="tile-k">New NEAR from inflation, a year</span><b data-k="issuanceUsd">…</b><span class="tile-s" data-k="issuanceText">&nbsp;</span></div>
+        <div class="tile accent"><span class="tile-k">Buybacks cover of new supply</span><b data-k="coverage">…</b><span class="tile-s" data-k="breakevenText">&nbsp;</span></div>
+        <div class="tile"><span class="tile-k">NEAR blockchain transactions</span><b data-k="l1Txns">…</b><span class="tile-s" data-k="l1YoYText">&nbsp;</span></div>
+      </div>
+    </section>
+
+    <section class="band" id="claims" aria-labelledby="claims-h">
+      <div class="wrap">
+        <h2 id="claims-h">The thesis in four claims</h2>
+        <p class="intro">The case holds only while all four stay true. Each is checked against live data every hour, with the rule written down in advance, so the page can tell you when the thesis breaks.</p>
+        <div class="claims" id="claims-list"></div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="evidence" aria-labelledby="ev-h">
+      <h2 id="ev-h">The evidence</h2>
+
+      <article class="fig">
+        <header><h3>1. Order flow is real and growing</h3><p class="take" data-k="volTake">&nbsp;</p></header>
+        <div id="ch-volume" class="chart"></div>
+        <p class="src">Monthly swap volume through NEAR Intents. Source: DefiLlama. The latest month is partial and drawn lighter.</p>
+      </article>
+
+      <article class="fig">
+        <header><h3>2. NEAR earns from that flow, and now spends it on NEAR</h3><p class="take" data-k="revTake">&nbsp;</p></header>
+        <div id="ch-revenue" class="chart"></div>
+        <p class="src">Revenue NEAR captured from Intents each month (its share after integrators and solvers). From 23 Feb 2026 all of it buys NEAR. Revenue is recorded when swept to NEAR's wallets, so single months are lumpy. Source: DefiLlama.</p>
+      </article>
+
+      <article class="fig">
+        <header><h3>3. The value has moved from blockspace to order flow</h3><p class="take" data-k="shiftTake">&nbsp;</p></header>
+        <div id="ch-shift" class="chart"></div>
+        <p class="src">Both lines indexed to 100 in their first common month. Intents: monthly swap volume (DefiLlama). Blockchain: average daily transactions on NEAR (NearBlocks).</p>
+      </article>
+
+      <article class="fig">
+        <header><h3>4. The gap the thesis has to close</h3><p class="take" data-k="gapTake">&nbsp;</p></header>
+        <div id="ch-gap" class="chart"></div>
+        <p class="src">Dollars spent on buybacks each month vs the dollar value of new NEAR created by inflation that month (supply change × average price). Sources: DefiLlama, NearBlocks, CoinGecko.</p>
+      </article>
+    </section>
+
+    <section class="band" id="value" aria-labelledby="val-h">
+      <div class="wrap">
+        <h2 id="val-h">Valuation: what you pay today</h2>
+        <div class="two">
+          <div class="prose">
+            <p data-k="valP1">&nbsp;</p>
+            <p data-k="valP2">&nbsp;</p>
+            <p>That is why this is a <em>long-term</em> thesis. At today's price the token is not cheap on cash flow; it is a bet that order-flow revenue compounds for years while inflation stays fixed at about 2.5%.</p>
+          </div>
+          <dl class="facts" id="facts"></dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="model" aria-labelledby="model-h">
+      <h2 id="model-h">The model: when do buybacks match inflation?</h2>
+      <p class="intro">Volume compounds at a monthly growth rate. NEAR keeps its cut. That revenue buys NEAR at a given price. New NEAR is created at the inflation rate. Coverage is NEAR bought ÷ NEAR created; 100% means buybacks absorb all new supply. The three scenarios are built only from measured data, and the sliders let you test your own view.</p>
+
+      <div class="model">
+        <div class="controls" id="controls">
+          <div class="seg" role="group" aria-label="Scenario">
+            <button type="button" data-s="bear">Bear</button><button type="button" data-s="base" aria-pressed="true">Base</button><button type="button" data-s="bull">Bull</button>
+          </div>
+          <p class="why" id="why"></p>
+          <label class="sl"><span>Volume growth, per month <output id="o-growth"></output></span><input type="range" id="i-growth" min="-6" max="12" step="0.25"></label>
+          <label class="sl"><span>NEAR's cut of volume <output id="o-take"></output></span><input type="range" id="i-take" min="1" max="10" step="0.1"></label>
+          <label class="sl"><span>NEAR price <output id="o-price"></output></span><input type="range" id="i-price" min="0.5" max="20" step="0.05"></label>
+          <label class="sl"><span>Inflation, per year <output id="o-infl"></output></span><input type="range" id="i-infl" min="0" max="5" step="0.05"></label>
+          <button type="button" class="reset" id="reset">Reset to measured values</button>
+        </div>
+        <div class="model-out">
+          <div class="mstats" id="mstats"></div>
+          <div id="ch-model" class="chart"></div>
+          <p class="src">Coverage each month for 36 months. Dashed line: your settings. Run the same model from the command line with <code>npm run model</code>.</p>
+          <div class="tscroll"><table class="ytable" id="ytable"></table></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="risks" aria-labelledby="risk-h">
+      <div class="wrap">
+        <h2 id="risk-h">What would prove this wrong</h2>
+        <p class="intro">A thesis is only useful if it says how it fails. These are the risks, and where each would show up in the data first.</p>
+        <div class="risks">
+          <div class="risk"><h3>Routes go dark</h3><p>NEAR Intents can pause a chain. On 29 Oct 2026 we observed the 1Click API refusing every deposit from Ethereum mainnet, and temporary minimums of $100 on USDT (Tron) and $1,000 on BNB Chain. Long pauses on big chains cut volume directly.</p><p class="watch">Shows up in: claim 1 (volume) within weeks.</p></div>
+          <div class="risk"><h3>Fee competition</h3><p>Cross-chain swaps are a crowded market. If wallets and frontends route elsewhere, or NEAR lowers its fee to keep them, revenue per dollar of volume falls even while volume grows.</p><p class="watch">Shows up in: claim 2 (take rate).</p></div>
+          <div class="risk"><h3>Whale-driven volume</h3><p>A handful of very large days can flatter a quarter. Volume that depends on a few traders or one integrator is fragile.</p><p class="watch">Shows up in: claim 3 (breadth).</p></div>
+          <div class="risk"><h3>Buybacks are held, not burned</h3><p>Bought NEAR sits in a buyback wallet rather than being destroyed. A future decision could sell it, which would reverse the effect. Governance, not code, protects the policy.</p><p class="watch">Shows up in: the buyback wallet's balance and NEAR governance announcements.</p></div>
+          <div class="risk"><h3>The base chain keeps shrinking</h3><p>NEAR blockchain activity is far below a year ago. Intents settles on NEAR, but if the chain's own ecosystem keeps fading, validators, developers and liquidity could thin out too.</p><p class="watch">Shows up in: chart 3 and the transactions tile above.</p></div>
+          <div class="risk"><h3>Data risk</h3><p>Revenue and volume come from DefiLlama's adapters and NearBlocks. Methodology changes or missing days move the numbers. That is why rates use 90-day windows and every input is linked.</p><p class="watch">Shows up in: the Method section and the saved snapshots in the repository.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="method" aria-labelledby="m-h">
+      <h2 id="m-h">Method and sources</h2>
+      <div class="two">
+        <div class="prose">
+          <h3>Definitions</h3>
+          <ul>
+            <li><b>Volume</b>: dollar value of swaps settled through NEAR Intents.</li>
+            <li><b>Revenue</b>: what NEAR itself captures from those swaps, measured as NEAR/wNEAR swept into its revenue wallets (reconciles with revenue.near.org). Gross fees are higher because integrators and solvers keep the rest.</li>
+            <li><b>Take rate</b>: revenue ÷ volume over the last 90 days, in basis points (1 bp = 0.01%).</li>
+            <li><b>Buybacks</b>: revenue used to buy NEAR on the open market since 23 Feb 2026 (DefiLlama "holders revenue").</li>
+            <li><b>Issuance</b>: change in NEAR total supply over the last 365 days (NearBlocks), valued at today's price.</li>
+            <li><b>Coverage</b>: yearly buybacks at the 90-day pace ÷ yearly issuance in dollars.</li>
+          </ul>
+          <h3>Re-run it yourself</h3>
+          <pre><code>git clone https://github.com/HATWHY4041/near-intents-thesis
+cd near-intents-thesis
+npm run model            # fetch fresh data, print the report, save a snapshot
+npm run model -- --growth 0.02 --take-bps 4   # your own assumptions
+npm start                # this page on http://localhost:3000</code></pre>
+          <p>No API keys and nothing to install: Node 20 or newer is enough. Each run saves a dated snapshot in <code>data/</code>, so the evidence behind any version of the thesis stays checkable.</p>
+        </div>
+        <div>
+          <h3>Sources</h3>
+          <ul class="sources" id="sources"></ul>
+          <p class="small" id="gen"></p>
+          <p class="small"><a href="/api/data">Raw data (JSON)</a> · <a href="https://github.com/HATWHY4041/near-intents-thesis">Source code</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <p>This is research, not financial advice. Numbers update from public data and can be revised by their sources.</p>
+    <p>Built at NEAR HACKATHON 2026 · Investment Thesis track.</p>
+  </footer>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
